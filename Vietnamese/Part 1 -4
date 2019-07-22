@@ -1,0 +1,224 @@
+1.1.	Lời giới thiệu
+Xin chào tất cả mọi người. Rất vui khi được giới thiệu cho các bạn về một nền tảng blockchain đáng chú ý mang tên Klaytn. Hiện nay có rất nhiều blockchain khác nhau nhưng đều có nhiều hạn chế về tốc độ, hiệu suất và tính hoàn thiện. Klaytn Blockchain của Kakao đã cải thiện thành công vấn đề này bằng cách giữ cho thời gian tạo khối chỉ trong vòng một giây và xử lý hơn 3000 giao dịch mỗi giây. Phí giao dịch cũng rất rẻ. Đồng thời cho phép xây dựng chuỗi dịch vụ lớn mà vẫn đảm bảo quyền riêng tư.
+
+Klaytn blockchain đã hạn chế những rào cản cho các nhà lập trình viên lập trình thông qua việc hỗ trợ Solidity cho việc lập trình hợp đồng thông minh và hỗ trợ Truffle framework cho việc phát triển DApp. Việc này trở nên dễ dàng hơn ngay cả với những người mới chỉ bằng cách đọc hiểu tài liệu hướng dẫn có sẵn.
+
+Tôi sẽ chỉ ra vấn đề của những nền tảng blockchain hiện tại và cùng xem cách mà Klaytn sẽ giải quyết chúng – một hướng đi tốt hơn. (Click) Tiếp theo, Tôi sẽ chỉ cho bạn cách sử dụng các công cụ trong Klaytn như Ví, IDE, Scope. Cuối cùng, hãy dành thời gian để hiểu tiềm năng của Klaytn bằng cách tạo một trò chơi đơn giản thông qua caver.js.
+Hãy cùng nhau sử dụng Klaytn, cái tên sẽ trở thành nền tảng blockchain hàng đầu và tạo ra một ứng dụng blockchain (BApp) có thể trở nên phổ biến trong tương lai.
+
+2.	Nhược điểm của các nền tảng blockchain hiện nay
+2.1.	Khả năng mở rộng
+Khả năng mở rộng có nghĩa là việc mở rộng nền tảng. Hiểu đơn giản là nó có thể xử lý nhiều công việc một cách nhanh chóng. Chúng tôi không biết Bitcoin hay Ethereum sẽ giải quyết vấn đề về khả năng mở rộng như thế nào, mặc dù họ vẫn nói là đang giải quyết vấn đề này. Hãy nói về khả năng mở rộng, và tại sao nó lại quan trọng.
+
+Về khả năng mở rộng, chúng tôi sử dụng thuật ngữ TPS và Block Interval. TPS là từ viết tắt của giao dịch mỗi giây, có nghĩa là có bao nhiêu giao dịch có thể xử lý trong một giây. Block Interval là khoảng thời gian mà mỗi block được tạo ra.
+
+Visa xử lý trung bình 1.700 giao dịch mỗi giây. Trên lý thuyết Bitcoin chỉ có thể xử lý 7 giao dịch mỗi giây, nhưng thực tế, Bitcoin chỉ có thể xử lý 2 đến 5 giao dịch mỗi giây. Ethereum thì tầm khoản 15 đến 20 giao dịch mỗi giây.
+
+Khoảng thời gian tạo ra một block của Bitcoin là 10 phút, và thời gian tạo block của Ethereum là 15 đến 20 giây. Nếu tốc độ xử lý của Ethereum là 20 tps và thời gian tạo block là 15 giây, thì 20 nhân 15, tổng cộng sẽ có 300 giao dịch trong một block.
+
+Đây là một câu hỏi. Nếu bạn có một nền tảng blockchain với 10.000 tps và khoảng thời gian block là 10 phút thì trải nghiệm người dùng sẽ như thế nào? Vâng, điều đó có nghĩa là phải mất tới 10 phút để hoàn thành xong một block với 10.000 giao dịch trong một giây. Điều gì xảy ra sau đó? Hãy tưởng tượng bạn muốn gửi tiền cho bạn bè, bạn nhấn nút chuyển và chờ 10 phút sau mà giao dịch vẫn chưa hoàn thành. Điều này thật vô lý phải không? Ethereum thì nhanh hơn đáng kể so với Bitcoin, nhưng 15 đến 20 giây cũng là khá dài đối với người dùng. Chúng tôi cảm thấy thất vọng vì không thấy nền tảng nào có thể xử lý giao dịch trong 5 giây trên Internet. Điều này là không thể chấp nhận được ở thế kỷ 21.
+
+Vậy, lý do tại sao các Blockchain hiện nay lại chậm. Lý do đầu tiên, đặc điểm của một mạng blockchain thực tế là nhiều node không có nghĩa là mạng lưới đó nhanh hơn. Các dịch vụ phổ biến như web cũng như mobile có số lượng máy chủ lớn để đảm bảo sự đáp ứng nhanh chóng cho người dùng khi lượng lớn yêu cầu được gửi tới, các yêu cầu sẽ được phân tách và xử lý một cách riêng biệt.
+
+Mặc dù, một máy chủ được gọi là một node – cấu thành nên mạng lưới blockchain, khi nhận 100 công việc thì sẽ xử lý toàn bộ công việc mà không bị phân tán. Như vậy, mỗi node sẽ lặp lại cùng một công việc. Kết quả là hiệu suất của toàn bộ mạng lưới sẽ phụ thuộc vào tốc độ của node chậm nhất. Hiệu suất của một máy tính không có gì khác biệt so với hàng nghàn máy tính khác. Do đó, các mạng blockchain như Bitcoin hay Ethereum không thể xử lý một lượng giao dịch lớn là như vậy.
+
+2.2.	Thiếu tính hữu hạn
+Tính hữu hạn đề cập đến trạng thái cuối cùng không thể thay đổi. Tính hữu hạn của một khối trong blockchain đảm bảo các giao dịch trong khối không bị thay đổi. Ở đó giao dịch sẽ hoàn thành mà không có sai lệch nào. Tuy nhiên, cơ chế đào trong Bitcoin và Ethereum lại thiếu tính hữu hạn. Ví dụ, bạn dùng Bitcoin để mua vé máy bay. Giao dịch sẽ được tạo ra tại thời điểm đó, điều này có nghĩa là giao dịch đó được lưu lại trong hồ sơ. Tuy nhiên, giao dịch này không được xử lý ngay, nhưng không có gì đảm bảo. Nó chỉ cung cấp khả năng để các giao dịch được xử lý. Điều đó có nghĩa là bạn đã thanh toán nhưng sau đó nhận ra việc thành toán chưa chắc là sẽ thành công.
+
+Bảng bên dưới thể hiện thời giant rung bình để đạt được tính hữu hạn.
+(Bảng)
+
+Với Bitcoin, trung bình mất 60 phút để đạt đến tính hữu hạn. Việc khai thác một khối mất 10 phút, nhưng tốn tới 1 giờ thông qua 6 bước để đạt tính hữu hạn. Còn với Ethereum thì phải mất 6 phút để đạt tính hữu hạn. Nếu xác minh bước này, mức độ giao dịch của bạn đáng tin cậy hơn. Nhưng sẽ mất rất nhiều thời gian để thực hiện các bước xác minh này, do đó khiến tiền mã hóa rất khó thương mại hóa. Sau khi bạn thanh toán xong, tốc độ đạt đến tính hữu hạn là không khả thi. Có bao nhiêu người sẵn sàng đợi đến cả tiếng đồng hồ? Tính hữu hạn đóng một vai trò rất quan trọng, tuy nhiên tính hữu hạn cần khoảng thời gian chờ nhất định để đảm bảo giao dịch sẽ không bị thay đổi.
+
+Cuối cùng, việc chờ đợi trong thời gian dài ở mạng lưới blockchain có thể có tác động xấu đến doanh nghiệp của bạn, vì vậy tính hữu hạn nhanh đóng vai trò như là một loại tài sản kinh doanh. 
+
+2.3.	Phân nhánh
+Phân nhánh là hiện tượng một blockchain bị chia thành hai hoặc nhiều nhánh. Lý do xảy ra hiện tượng này là vì tất cả những người tham gia vào mạng blockchain ngang hàng có thể khai thác độc lập với nhau. Đầu tiên, tôi sẽ giải thích về PoW trong Bitcoin và Ethererum. PoW được hiểu là việc đi tìm ra hàm băm phù hợp để thêm khối mới vào mạng lưới Blockchain. Các máy tính cạnh tranh nhau để giải quyết vấn đề này. Đôi khi hai máy tìm ra giá trị hàm băm tại cùng một thời điểm. Khi đó, hai khối tương ứng với hai hàm băm này đóng vai trò như ứng cử viên được thêm vào mạng lưới blockchain. Tại thời điểm này, sẽ xảy ra hiện tượng phân nhánh.
+
+Ví dụ: Giả sử bạn đang khai thác từ hai máy tính tại hai node khác nhau Node A và node B. Một ngày nọ, tôi chuyển tiền cho bạn của mình. Sau đó, giao dịch xảy ra và đi vào pool giao dịch. Các node A, B đặt giao dịch này trong pool của mỗi khối riêng để tạo khối. Tại thời điểm này, cả hai khối đều chứng các giao dịch mà tôi đã gửi cho bạn của mình. Giai đoạn cuối của quy trình này tất cả các máy tinh thi nhau giải bài toàn về độ khó và gửi đi tín hiệu cho tất cả các node gần nhất xung quanh nó khi tìm ra được giá trị hàm băm chính xác.
+
+Trong quá trình lan truyền này, một số node nhận được block màu tím từ node A và các node khác nhận được block màu đen từ nút B. Dẫn đến hiện trượng rẽ nhánh, bởi các node sau khi nhận được khối màu tím sẽ bỏ qua khối màu đen. Và ngược lại, các node nhận được khối màu đen sẽ từ chối khối màu tím.
+
+Tiếp theo, node C tìm ra giá trị hàm băm đã tạo và lan truyền khối thứ tư. Trong trường hợp này, node C tạo ra khối thứ tư đã nhận được khối đen thứ ba. Như vậy khối đen sẽ được thêm vào vì nó chứa hàm băm “cha” của khối đen thứ ba.
+
+
+Sau đó, các node ngay lập tức loại bỏ khối màu tím thứ 3 vừa được nhận và tiến hành tải lại, bắt đầu với khối màu đen thứ 3. Điều này có nghĩa là chuỗi đen sẽ được duy trì mãi. Chuỗi càng dài, càng có nhiều khả năng nó được công nhận và được thêm vào blockchain. Đây là quy tắc chuỗi dài nhất. Quá trình phân nhánh và sáp nhập được tiến hành một cách như thế.
+
+Tuy nhiên, quy tắc này sẽ bị xâm phạm trong trường hợp một bên nào đó có hơn 51% sức mạnh tính toán khiến nó có thể đào nhanh hơn nhiều và tạo ra nhiều khối hơn so với các thợ đào khác. 
+
+Ví dụ, nhánh được hình thành ở khối thứ ba và như thường lệ phải đợi khối thứ tư, thay vào đó kẻ tấn công có thể tạo và thêm block thứ tư bằng sức mạnh tính toán cho phép tạo các khối nhanh hơn. Theo cách này, kẻ tấn công không phải thông báo chuỗi sang các node khác và tiếp tục mở rộng chuỗi của mình một cách bí mật. Đây là quy tắc thêm khối vào mạng lưới blockchain bằng cách chọn chuỗi dài nhất ở cuối nhánh. Qua đó có thể thay đổi giao dịch trên mạng lưới blockchain.
+
+3.	Tìm hiểu về Klaytn
+3.1.	Cơ chế đồng thuận
+Trong các tập trước, chúng ta đã cùng nhau thảo luận về những vấn đề mà blockchain hiện tại đang gặp phải. Bây giờ hãy nói về cách Klaytn giải quyết vấn đề bằng thuật toán đồng thuận. Có nhiều loại thuật toán đồng thuận, chẳng hạn như PoW (Bằng chứng công việc) hay PoS (Bằng chứng cổ phần), thường được sử dụng trong các Blockchain công khai (Public Blockchain) và PBFT (practical byzantine fault tolerance) hoặc Raft, được sử dụng trong các Blockchain riêng tư (Private Blockchain). Nhìn chung, blockchain riêng tư có thể đạt được thỏa thuận nhanh hơn so với blockchain công khai. Đặc biệt, blockchain riêng tư dựa trên BFT có thể đạt được hiệu suất và hiệu quả cao bằng cách giới hạn số lượng nút tham gia mạng lưới. Tuy nhiên, cấu hình này giới hạn số lượng nút tham gia đồng thuận, làm giảm đi tính phi tập trung và chỉ một số nhóm nhỏ được tiết lộ về nội dung của kết quả đồng thuận. Do đó, nó hạn chế tính minh bạch và ảnh hưởng xấu đến tiềm năng của blockchain.
+
+Mặt khác, Klaytn chọn thuật toán đồng thuận Istanbul BFT vì chúng tôi tin rằng bằng cách sử dụng tốt những ưu điểm của BFT, nó có thể kết hợp những điểm tốt nhất của cả blockchain công khai và riêng tư. Klaytn hướng đến việc trở thành một blockchain công khai với hiệu suất và sự ổn định trong khi vẫn duy trì được tính bảo mật và minh bạch cho các doanh nghiệp lớn. Để đạt được mục tiêu này, Klaytn sử dụng mô hình của thuật toán đồng thuận riêng tư kết hợp với việc công bố công khai. Nó bao gồm một số lượng nhỏ các nút riêng tư cùng đạt được sự đồng thuận, và các nút khác có thể truy cập công khai cũng như kiểm tra kết quả tạo khối. Bây giờ chúng ta hãy xem chi tiết về Istanbul BFT mà Klaytn sử dụng làm thuật toán đồng thuận.
+
+Quá trình đồng thuận của Istanbul BFT bao gồm ba bước: Chuẩn bị trước, chuẩn bị, và cam kết. Klaytn sử dụng một phương pháp luân phiên  (round-robin) để chọn nút đề xuất (proposer) trong các nút đồng thuận mỗi vòng. Các nút đồng thuận còn lại là nút xác thực (validator) thực hiện việc xác minh.
+
+Nếu bạn nhìn vào hình, có những nút đề xuất, nút xác thực 1, 2, 3, ... Trong số đó, các nút được đánh dấu X là ở là đang ở trong tình trạng bị lỗi. Có nghĩa rằng nó đang không hoạt động bình thường như một nút xác minh. Khi máy tính bị hỏng, mạng lưới bị ngắt kết nối, hoặc máy tính gây hại có thể khiến điều này xảy ra.
+
+Bước đầu tiên gọi là "đề xuất" trong đó một trong số những node đồng thuận được lựa chọn trở thành node đề xuất. Bước thứ hai là chuẩn bị trước tại đây nút đề xuất tạo khối và đưa ra đề xuất cho các nút khác. Sau đó, gửi đề xuất đến nút xác thực 1, nút xác thực 2, và nút xác thực 3. Đây là bước để được thông qua cùng với thông tin được gửi đi.
+
+Trong bước chuẩn bị thứ 3, khi nút xác thực 1, 2, và 3 nhận được thông điệp từ nút đề xuất, chúng gửi đi thông điệp đã nhận đến các nút khác. Nút xác thực 1 sẽ gửi thông điệp tới cả 3 nút. Tuy nhiên, nút xác thực 3 không gửi mà chỉ nhận thông điệp vì nó hiện đang bị lỗi.
+
+Vào cuối trạng thái chuẩn bị, bạn có thể xem có bao nhiêu nút bên trong hệ thống. Giống như hình ảnh này, chúng ta có thể thấy rằng cả 3 đều tồn tại: nút đề xuất, nút xác thực 1, và nút xác thực 2. Quá trình này đảm bảo cho tất cả các nút xác minh nằm trong cùng một vòng.
+
+Cuối cùng, trong giai đoạn cam kết, quá trình giao tiếp với các nút khác diễn ra để quyết định xem có nên chấp nhận một khối nhận được từ nút đề xuất không. Ví dụ, nó sẽ gửi phản hồi tới các nút để kiểm tra xem khối từ nút đề xuất là đúng hay sai. Nếu hơn 2/3 số nút đồng ý, khối đó sẽ được chấp thuận ngay lập tức. Sau cùng, giai đoạn cam kết sẽ quyết định khối được tạo ra thành công hay không. Điều đó có nghĩa là ở giai đoạn này, việc thiếu sót tính hữu hạn không còn nữa và trạng thái cuối cùng không thể thay đổi được hình thành. Nó không ở trong trạng thái mơ hồ như PoW.
+
+Vì vậy, ưu điểm của nó là đồng thuận nhờ vào giao tiếp và hoàn thành ngay lập tức. Tuy nhiên, có một nhược điểm là lưu lượng tăng theo cấp số nhân khi số nút đồng thuận tăng lên. Do đó, chỉ chọn một phần của nút đồng thuận và duy trì hình thức BFT.
+
+Hãy xem cách khối được tạo ra và lan truyền trong phần tiếp theo.
+
+
+3.2.	Tạo và lan truyền khối
+Chúng ta hãy cùng xem cách Klaytn tạo và lan truyền các khối để đáp ứng được trải nghiệm người dùng.
+
+Đầu tiên hãy quan sát chu trình tạo khối. Chu trình tạo khối của Klaytn được gọi là một 'vòng', một khối mới được tạo ra mỗi vòng và một vòng mới bắt đầu ngay sau khi vòng trước đó kết thúc. Thời gian tạo khối mất khoảng 1 giây.
+
+Hãy xem cách lựa chọn node đề xuất và hội đồng hoạt động như thế nào? Trong mỗi vòng, nút đề xuất tạo ra các khối được lựa chọn từ một trong các nút của Hội đồng quản trị một cách ngẫu nhiên nhưng dứt khoát. Hội đồng quản trị là tập hợp các nút cốt lõi hoặc nút đồng thuận. Nếu bạn nhìn vào ảnh, những vòng tròn này là các nút đồng thuận, trong đó màu xanh được chọn là nút đề xuất của vòng hiện tại. Và sau đó chọn một nhóm các nút đồng thuận làm ủy ban của vòng đó. Chúng là những nút xác thực màu hồng được lựa chọn bởi ủy ban. Cụ thể hơn, mỗi nút đồng thuận sử dụng một số ngẫu nhiên bắt nguồn từ đầu khối gần nhất để tiến hành mã hóa nhằm chứng minh rằng nó đã được chọn cho vòng này.
+
+Chúng ta hãy xem về việc đề xuất và xác thực khối. Khi một nút đồng thuận được chọn làm nút đề xuất, nó sẽ thông báo cho các nút đồng thuận khác về bằng chứng cho thấy nó đã được chọn làm nút đề xuất trong vòng này. Tại thời điểm đó, nó sẽ chứng minh điều này bằng bằng chứng được mã hóa xác minh với khóa công khai (Public Key) của nút đề xuất. Sau đó, nhóm nút đồng thuận được bầu vào ủy ban sẽ chứng minh với nút đề xuất tại sao họ được chọn làm một thành viên của ủy ban. (Click) Bây giờ bạn biết ai là nút đề xuất và Ủy ban, nút đề xuất sẽ lựa chọn và sắp xếp các giao dịch trong pool giao dịch và tạo ra khối. Sau đó quá trình đồng thuận với Ủy ban xảy ra, kết thúc quá trình này khối mới được tạo ra.
+
+Cuối cùng Khối được đề xuất phải có chữ ký của 2/3 số thành viên ủy ban để được chấp nhận. Khi ủy ban đạt được thỏa thuận, khối mới được gửi đến tất cả các nút đồng thuận và vòng đồng thuận này kết thúc. Sau đó bạn có thể truyền khối đến các nút tại điểm cuối thông qua (click) nút Proxy. Như vậy, chúng ta đã tìm hiểu về cách nút đề xuất và ủy ban được lựa chọn và thống nhất để tạo và lan truyền khối.
+
+3.3.	Cấu trúc mạng lưới
+Hãy dành một chút thời gian để giải thích về cấu trúc mạng Klaytn. Bên trái là sơ đồ mạng lưới. Có một phần trung tâm (core cell) trong toàn bộ mạng và có một nút điểm cuối (endpoint) bao quanh core cell. Nếu bạn nhìn vào phần mở rộng bên cạnh nó, bên trong ô màu đỏ là phần trung tâm của mạng và ô màu xanh bên ngoài là mạng điểm cuối. Trong phần trung tâm, phần màu vàng là Mạng lưới nút đồng thuận - CN, và phần màu đỏ Mạng lưới nút Proxy - PNN. CNS trong ô vàng sẽ chịu trách nhiệm về sự đồng thuận.
+
+Một Core Cell được vận hành bởi một người tham gia. Nó hoạt động với một CN và nhiều nút Proxy kết nối với CN và để tham gia vào CN bạn phải đáp ứng những yêu cầu chặt chẽ. Các CN được kết nối để có thể giao tiếp với nhau. Nếu có 10 CN, tất cả chúng được kết nối với nhau. Tất cả được kết nối bởi chúng phải giao tiếp với nhau nhanh nhất có thể trong quá trình đồng thuận. CN không thể kết nối trực tiếp với bên ngoài. Bởi vì nó là một môi trường rất riêng tư không chịu sự can thiệp từ bên ngoài nên có khă năng nhanh chóng quyết định liệu có tạo ra khối hay không, như một nút đồng thuận. Vậy có thể tiếp cận nó như thế nào? Là một người tham gia trong core cell, nó giống như việc bạn chạy một mạng proxy mà bạn có thể quản lý và được tin tưởng để đại diện cho chúng.
+
+Và ở bên ngoài, các nút điểm cuối được kết nối với mạng của core cell. Những nút điểm cuối có thể kết nối đến nút proxy trong core cell để nhận được thông tin. Tất nhiên, các nút điểm cuối có thể kết nối và trao đổi thông tin với nhau. Tuy nhiên, nếu các nút điểm cuối kết nối đến nút proxy, nó sẽ nhận được các khối nhanh hơn. Lưu ý rằng không có yêu cầu nào cho việc trở thành một nút điểm cuối. Bất cứ ai cũng có thể là một nút điểm cuối và chuyển thông tin đến khách hàng như trang web hoặc điện thoại di động. Nút điểm cuối này đóng vai trò như một nhà cung cấp dịch vụ.
+
+Và một lần nữa, bạn có một nút khởi động CN, một nút khởi động PN, và một nút khởi động EN, là những nút đặc biệt được vận hành bởi Klaytn giúp nút mới đăng ký vào mạng và kết nối với nút khác. Nút khởi động CN nằm trong mạng CN và không được công khai. Các nút khởi động PN và EN là các nút công khai. Nút khởi động PN chỉ cho phép đăng ký trên các proxy nhất định và giúp kết nối với các nút điểm cuối. Nút khởi động EN cung cấp thông tin đến các nút điểm cuối về việc nút Proxy nào để kết nối. Như vậy, chúng tôi đã mô tả một cách ngắn gọn về cấu trúc mạng Klaytn.
+
+
+3.4.	Core Cell
+Hãy nói thêm về Core cell (phần trung tâm). Khi mainnet được ra mắt, Core cell sẽ chịu trách nhiệm về sự đồng thuận hoạt động theo hàng chục đơn vị với nhau. Khi các hoạt động trở nên nhiều hơn, hệ thống sẽ như thế nào khi có nhiều kết nối đến core cell? Trong thực thế (không phải blockchain), khi người dùng tăng lên, chúng tôi sẽ tăng số lượng máy chủ và chia nhỏ các yêu cầu. Tuy nhiên, trong trường hợp blockchain, số lượng các nút tăng lên có thể làm chậm tốc độ vì thông tin cần phải được thông qua mỗi nút trong quá trình xử lý. Số lượng các nút tăng lên không làm tăng hiệu suất. Vì vậy, thay vì tăng số nút, tăng hiệu quả hoạt động của nút là cách hợp lý hơn. Ví dụ, bạn có thể tăng hiệu suất của RAM hoặc CPU. Hãy xem xét điều kiện để trở thành một nút đồng thuận. Cấu hình của người tham gia cần có:
+1.	Hơn 40 lõi vật lý
+2.	256 Gb RAM
+3.	14 Tb ổ đĩa/ năm
+4.	Mạng 10G 
+
+Lưu ý rằng hiệu suất cao của một trong những nút đồng thuận từ người tham gia không có nghĩa là tốc độ của toàn bộ mạng core cell sẽ cao. Bởi tốc độ phụ thuộc vào toàn bộ các nút của mạng. Do đó, để cải thiện hiệu suất của core cell, các nút cần phải có thông số kỹ thuật tương tự nhau.
+Và khi nhìn vào cấu trúc của core cell, ta có thể thấy nó bao gồm một CN và rất nhiều PN. Có nhiều lý do tại sao cần có PN. Bởi vì CN bị giới hạn tài nguyên và số lượng, do đó cần có các PN để kết nối tới điểm cuối. Ví dụ, giả sử các nút điểm cuối có thể kết nối trực tiếp đến CN. Nếu CN này kết nối đến hàng nghĩ nút điểm cuối thì tốc độ đồng thuận sẽ bị chậm lại. Vì vậy, PN được sinh ra sẽ kết nối với các nút điểm cuối và chuyển thông tin cho CN. Như vậy, CN chỉ cần kết nối với một vài PN là có thể giải quyết các vấn đề kết nối điểm cuối một cách nhanh chóng.
+Tóm lại, CN sẽ làm nhiệm vụ đồng thuận trong khi đó PN sẽ kết nối trực tiếp với nút điểm cuối đê truyền thông tin đến CN. Cấu trúc này sẽ giải quyết vấn để mở rộng mạng lưới của blockchain hiện nay.
+
+3.5.	Chuỗi dịch vụ
+Chuỗi dịch vụ của Klaytn là một blockchain hoạt động độc lập được kết nối với mainnet. Ý tưởng này xuất phát từ khả năng mở rộng. Trong trường hợp muốn sử dụng một chuỗi dịch vụ, hoặc cấu trúc trong một môi trường nút đặc biệt, hay thay đổi mức độ bảo mật.  Ví dụ, khi muốn chạy một blockchain cá nhân với yêu cầu thông lượng rất lớn. Việc phân phối dịch vụ đến mainnet là không khả thi về mặt kinh tế, do đó cần sử dụng các chuỗi dịch vụ.
+
+Nhìn vào hình trên, vòng tròn lớn ở giữa là mainnet. Có thể thấy rằng các chuỗi dịch vụ giữ sự tin tưởng trong chuỗi chính, mà không thể tự do giao tiếp giữa chuỗi chính và chuỗi dịch vụ, và chỉ một số giao dịch hạn chế có thể được sử dụng. Ngoài ra, việc truyền tải của KLAY sẽ được phép với những điều kiện nhất định.
+
+Nói cách khác, các chuỗi dịch vụ xây dựng một không gian dịch vụ riêng biệt và khóa tin cậy trên mainnet khi cần thiết. Nền tảng blockchain khác cũng đang tiến tới việc áp dụng công nghệ này. Trong trường hợp của Ethereum, có nhiều hạn chế về dung lượng và tốc độ của mainnet mà ví dụ điển hình là Crypto Kitties đã khiến cho mạng lưới của Ethereum gần như tắc nghẽn hoàn toàn. Để giải quyết vấn đề này Ethereum đưa ra một khái niệm dựa trên công nghệ chuỗi phụ (sidechain) gọi là plasma, trong đó, nếu được thực hiện một cách chính xác, nó sẽ giúp giảm bớt gánh nặng cho chuỗi chính và cho phép nhiều giao dịch được xử lý mỗi giây. Nhưng hiện tại vẫn chưa ra mắt.
+
+Bằng cách này, trong chuỗi dịch vụ Klaytn, bạn có thể thiết lập một khoản phí gas bằng không cho tất cả các giao dịch. Nó có nghĩa là các nhà phát triển BApp hoặc nhà cung cấp dịch vụ có thể xây dựng môi trường riêng của mình và cung cấp dịch vụ cho người sử dụng trong chuỗi dịch vụ. Vâng, đến đây tôi đã nói tất cả về chuỗi dịch vụ của Klaytn.
+
+3.6.	Sự khác biệt giữa Klaytn và Ethereum - Vai trò khác nhau của các nút
+Hãy nói ngắn gọn về sự khác nhau giữa Ethereum và Klaytn.
+
+Ethereum là một mạng đơn. Không có sự phân biệt giữa các thành viên trong mạng. Bất cứ ai cũng có thể tạo ra một khối, nhưng khi nói đến việc tạo ra một khối, người đó cần phải là người đầu tiên thông báo rằng mình đã tạo ra nó khi được mạng lưới chấp nhận sẽ nhận được phần thưởng. Đây gọi là PoW, phương pháp Bằng chứng công việc được sử dụng bởi Ethereum làm giao thức đồng thuận.
+
+Trong Ethereum, bạn cần phải kết nối với nhiều nút nhất có thể bởi vì bạn không biết ai sẽ là nút khai thác khối tiếp theo. Nói cách khác, các nút tạo khối phải có thông tin cập nhật. Nếu bạn biết rằng nút A luôn nhanh nhất trong việc tạo ra một khối lên trên nút, bạn chỉ cần gắn vào nút A này, sau đó bạn có thể nhận được thông tin nhanh nhất.
+
+Tuy nhiên, vì nút tạo khối nhanh nhất luôn thanh đổi nê bạn phải gắn vào nhiều nút nhất có thể để nhận được thông tin cập nhật một cách nhanh nhất.
+
+Ngược lại, Klaytn không phải là mạng đơn lẻ mà là mạng lưới với 2 lớp. Trong đó, một nút ở Core Cell sẽ được lựa chọn để tạo khối trong một vòng và thông tin mới nhất sẽ được cập nhật cho nút điểm cuối thông qua các nút PN.
+
+Bằng cách đó thông tin cập nhật được gửi đi tất cả các nút trên mạng lưới. Một ví dụ điển hình khi tạo ra một ứng dụng bạn có thể triển khai Cơ sở dữ liệu Java hoặc SQL đến dịch vụ lưu trữ đám mây của Azure hay AWS. Tuy nhiên, do máy chủ này không thể liên kết trực tiếp với core cell, vì vậy bạn phải kết nối đến nút điểm cuối để truy cập vào dữ liệu blockchain. Bạn có thể kết nối máy tính của mình đến một nút điểm cuối hoặc sử dụng nó để kết nối với một nút điểm cuối khác. Tuy nhiên, việc chạy nút điểm cuối cá nhân này không hề dễ dàng bởi nó cần đồng bộ với toàn bộ hệ thống blockchain mỗi khi có khối mới được tạo ra.
+
+Ngoài ra, người ta cũng quan tâm liệu máy tính có thể bị hỏng bởi một cuộc tấn công không. Để hạn chế vấn đề này, bạn có thể kết nối với một nút tin cậy bên ngoài, chẳng hạn như nút cơ sở hạ tầng của Ethereum. Ví dụ, bạn muốn kết nối với Klaytn và chỉ đọc dữ liệu thì việc kết nối đến nút công cộng bên ngoài sẽ ít tốn thời gian và dễ sử dụng là việc chạy một nút điểm cuối cá nhân.
+
+Cuối cùng, không giống như Ethereum, Klaytn cung cấp chuỗi dịch vụ có thể giao tiếp một phần với mainnet và xây dựng một không gian dịch vụ riêng biệt. Tóm lại, Klaytn là một mạng lưới trong đó có hai lớp tin tưởng lẫn nhau, để truy cập vào một blockchain nội bộ, nút điểm cuối có thể kết nối với mạng core cell khi đó việc viết hoặc nhận dữ liệu sẽ diễn ra một cách nhanh chóng.
+
+4.	Phát triển game với Klaytn Tools
+4.1.	Giới thiệu
+Xin chào mọi người. Trong phần hướng dẫn này, tôi sẽ phát triển một BApp sử dụng Blockchain Klaytn. BApp là từ viết tắt của Blockchain Applications. Chúng ta hãy tạo trò chơi pop-up sẽ trả 0,1 Klay miễn phí nếu bạn thực hiện phép cộng đúng trong 3 giây.
+
+Hãy xem cách nó hoạt động. Đầu tiên, đăng nhập vào tài khoản quản trị. Hệ thống sẽ xác thực tài khoản sử dụng tệp keystore và mật khẩu. Hãy chọn tệp keystore và nhập mật khẩu. Sau khi xác thực tài khoản, sử dụng Send KLAY tới nút Contract để nhập số lượng cần sử dụng. Lý do hệ thống gửi KLAY đến địa chỉ contract để thể hiện sự minh bạch về số tiền được sử dụng. Lưu ý rằng chỉ có thể thực hiện với tài khoản quản trị.
+
+Bây giờ tôi gửi 1 KLAY tới tài khoản của bạn. Khi giao dịch hoàn thành, bạn sẽ biết chính xác số tiền nhận được. Bây giờ bạn có thể bắt đầu trò chơi phép cộng. Giả sử bạn cài đặt trong 3 giây sẽ gửi 0.1 KLAY tới tài khoản người chơi. Nếu bạn thực hiện sai, hệ thống sẽ khởi động lại. Nếu thử lại và hoàn thành phép tính bạn sẽ nhận KLAY bằng cách nhấn nút OK. Khi giao dịch hoàn thành, số dư sẽ giảm 0,1 KLAY trong contract. Như bạn có thể thấy, giao dịch xử lý rất nhanh, đó là điểm mạnh của Klaytn. Liên kết bên dưới cho phép bạn xem được thông tin giao dịch.
+
+Nếu bạn có kinh nghiệm phát triển DApp trên Ethereum, bài hướng dẫn này sẽ khá dễ dàng cho bạn. Klaytn là một phiên bản fork của Ethereum. Ví dụ: JavaScript, caver.js, có thể tương tác với Blockchain Klaytn, tương tự như web3.js của Etherum. Ngoài ra, chúng tôi còn hỗ trợ ngôn ngữ solidity trong lập trình hợp đồng thông minh.
+
+Bằng cách sử dụng framework Truffle nền tảng cho phép lập trình viên dễ dàng phát triển BApp dù người đó là có hay không có kinh nghiệm về lập trình BApp. Klaytn đang phát triển một số công cụ hỗ trợ trong việc lập trình hợp đồng thông mình. Trong đó, IDE là một ví điện tử cho phép người dùng quản lý tài khoản, tìm kiếm thông tin giao dịch.
+4.2.	Ví Klaytn và quản lý tài khoản
+Để sử dụng mạng lưới blockchain, bạn phải có tài khoản riêng. Và cần có tài khoản ngân hàng để quản lý token KLAY của mình. Truy cập vào đường link bên dưới để đăng ký tài khoản https://baobab.klaytnwallet.com/. 
+Ví này chỉ dành cho mục đích thử nghiệm, và đồng KLAY được sử dụng ở đây không có giá trị thật. Đầu tiên, hãy tạo một tài khoản mới, nhấp Create để tạo ví mới. Quá trình này bao gồm việc tạo mật khẩu và tệp keystore. Trước khi làm điều đó, tôi sẽ giải thích tập keystore là gì. Nó giống như quy trình chúng ta đến ngân hàng để làm sổ tiết kiệm. vì vậy hãy lưu trữ tệp keystore ở nơi an toàn để những người khác không thể sử dụng nó. Với sự kết hợp giữ tệp keystore và mật khẩu sẽ bảo vệ hacker tấn công từ bên ngoài.
+
+Tiếp tục tạo tệp keystore, nhập mật khẩu nhấp vào “next” và tải xuống tệp keystore.  Sau khi tải xong, lưu khóa bí mật được xuất hiện trên màn hình. Khóa bí mật được yêu cầu mỗi khi ký giao dịch trong BApp của Klaytn. Chìa khóa bí mật này không nên được tiết lộ ra bên ngoài. Nó giống như mật khẩu ngân hàng và sổ tiết kiệm, nếu không có nó, bạn sẽ mất tiền.
+
+Đó là lý do tại sao tôi tạo tệp keystore để bảo vệ khóa bí mật. Người dùng phải nắm tệp kho khóa và mật khẩu lưu trữ khóa trước khi truy cập khóa bí mật. Ngay cả khi hacker có được tệp keystore, nhưng không biết khóa bí mật thì cũng không thể truy cập được và dĩ nhiên không thể lấy được tiền. Vì vậy đừng để keystore bị lộ ra bên ngoài. Bây giờ, tôi sẽ lưu lại khóa bí mật trong Notepad. Bạn có thể lưu khóa riêng của mình ở nơi an toàn. Sau khi lưu, người dùng có thể nhấp vào the view wallet info ở bên trái màn hình. Bạn có thể truy cập vào ví bằng 2 cách: Một là sử dụng khóa bí mật, thứ hai là truy cập bằng tệp keystore và mật khẩu của nó. Với cách đầu tiên, hãy truy cập nó bằng khóa bí mật. Sao chép và dán nó trong Notepad.
+
+Thông tin ví sẽ được hiển thị bao gồm địa chỉ public và khóa bí mật ở bên dưới. Bạn có thể xem danh sách giao dịch của mình. Ở bên phải màn hình, bạn có thể thấy số lượng KLAY và bạn cũng có thể thêm token vào ví bằng cách nhấp vào nút “plus”.
+
+Ngay bây giờ, hãy nhận 5 KLAY miễn phí bằng cách nhấp vào tab KLAY faucet tab. Bạn có thể nhận thêm KLAY sau 24 giờ. Vì trong thời gian ngắn bạn không thể nhận được nhiều KLAY vì vậy hãy chia số lượng KLAY ra để thử nghiệm. Lý do chúng tôi chỉ cho nhận thêm KLAY sau 24 giờ là vì một số người đã sử dụng đồng token với mục đích xấu. Bây giờ, hãy chuyển KLAY sang tài khoản khác.
+
+Chuyển sang tab “Send klay & token” để gửi và nhận token. Tôi sẽ gửi 1 KLAY để xem bao nhiêu phí tôi phải trả. Nó sẽ hiển thị tối đa phí giao dịch là 0,000625 KLAY. Chi phí này được tính bằng “gas price” nhân với “gas limit”. Gas price là chi phí cho lệnh giao dịch đến node đồng thuận. Gas Price của Klaytn luôn cố định, không giống như Ethereum. Rất khó để dự đoán phí giao dịch trên Ethereum vì gas price luôn dao động. Tuy nhiên, gas price của Klaytn luôn cố định ở mức 25 ston, bất kể bạn thực hiện các giao dịch nào.
+
+Gas limit là chi phí tối đa xử lý giao dịch. Ví dụ, chúng ta có một số vòng lặp vô hạn trong một giao dịch. Sau đó, giao dịch này sẽ tiếp tục chạy trong mạng lưới. Nếu giao dịch tốn hơn 25.000 gas, Klaytn sẽ phát hiện và ngừng giao dịch đó lại.
+
+Ston là một trong những đơn vị tiền tệ của KLAY. Tương tự như 1 USD ở Hoa Kỳ là 100 xu, có rất nhiều đơn vị KLAY. Tại liệu tham khảo tại đây https://docs.klaytn.com/klaytn/design/computing/exec_model  
+Có nhiều đơn vị KLAY đại diện cho KLAY. Trong đó, peb là đơn vị nhỏ nhất bằng 10^(-9) Ston. Hãy truy cập vào website: https://blockchains.tools/pebConverter?l=KLAY để truy đổi các đơn vị khác nhau trong Klaytn. 
+Chú ý là giao dịch thường trên Klaytn luôn được đặt ở mức phí 0,000625 KLAY. Trong khi đó những giao dịch được viết ở hợp đồng thông minh là không cố định bởi vì gas limit thay đổi tùy theo sự phức tạp của giao dịch.
+
+Bạn có thể thay đổi giá trị này bằng cách click vào nút Edit, nhưng bạn nên hạn chế điều đó và để ở chế độ mặc định và thử tiến hành giao dịch ngay bây giờ. Tiếp đó, bạn có thể thấy được thông tin về giao dịch như giá trị, phí. Click vào “Yes” để tiếp tục tiến hành giao dịch, chỉ sau vài giây là giao dịch sẽ thành công. Sau đó, bạn có thể click vào “View Transaction” để thấy được những thông tin chi tiết về lịch sử giao dịch vừa thực hiện.
+
+4.3.	Klaytn IDE và hợp đồng thông minh 1
+Liên quan tới IDE, hãy tạo một hợp đồng thông minh đơn giản vào trò chơi ứng dụng này. Thay vì tập trung quá nhiều vào hợp đồng thông minh, hãy tập trung vào các công cụ của Klaytn. Bạn có thể tạo và thử nghiệm bằng cách truy cập vào http://ide.klaytn.net/ . Nó tương tự như Ethereum IDE, nhưng ở đây được sử dụng để kết nối với Klaytn Node, chứ không phải với Ethereum Node. Bây giờ, hãy xem các tính năng của IDE Klaytn bằng cách tạo một hợp đồng thông minh.
+
+Như bạn đã biết, “Hợp đồng thông minh” tiếng Anh gọi là “Smart contract”. Nếu bạn nhìn vào đây, bạn sẽ thấy có hợp một hợp đồng được tạo theo mặc định. Hãy xóa cái này và bắt đầu. Bạn sẽ thấy dòng IDE Klaytn tương thích với viết phiên bản Solidity 0.4.24, vì vậy hãy làm việc với phiên bản này.
+
+Contract này có ba chức năng. Đầu tiên là gửi KLAY vào contract, thứ hai để cập nhật số dư của contract và cuối cùng là gửi KLAY từ contract đến tài khoản người dùng. Chúng tôi sẽ làm từng bước một và sử dụng các công cụ để kiểm tra. Đầu tiên, hãy đặt tên cho contract là AdditionGame, trò chơi Contract Edition.
+
+(Code) Tại thời điểm triển khai, hãy tạo một biến trạng thái có thể lưu trữ địa chỉ của tài khoản quản trị. Và tôi đang tạo ra một cấu trúc. Các cấu trúc thường làm gì? Vâng, nó có nhiệm vụ khởi tạo. Trong trường hợp của ngôn ngữ solidity, bạn không thể viết hoặc tải lại cấu trúc, bởi vì nó là cấu trúc sẽ được tải ngay khi bạn triển khai. Tôi có thể tận dụng điều này và thiết lập một tài khoản cho chủ sở hữu của contract. Đầu tiên chúng tôi tạo chủ sở hữu biến trạng thái. Đó là một địa chỉ với chủ sở hữu là msg.Sender.
+
+(Code) Tôi vừa tạo một cấu trúc. Trong đó, Msg.sender là tài khoản được sử dụng để triển khai hợp đồng này. Vì vậy, tôi sẽ gán tài khoản đó cho biến trạng thái chủ sở hữu và lưu nó vào Blockchain. Đây là sự khởi tạo, hãy kiểm tra code mà bạn vừa thêm vào. Bạn cần biên soạn trước bằng cách nhấp vào Auto checkbox ở đầu bảng bên phải để tự động biên soạn mỗi khi bạn viết code. Đầu tiên bạn phải bấm vào nút “compile” để xem nó có biên soạn không. Các thông tin được biên soạn sẽ hiển thị ở bên dưới. Chúng ta hãy thiết lập lại môi trường. Có nhiều sự lựa chọn ban gồm DEV NODE và Baobab hoặc bạn có thể thêm mạng lưới mới. Chức năng mạng lưới mới vừa được thêm vào sẽ kết nối với địa chỉ RPC nơi Klaytn Node hiện đang chạy. Tôi sẽ bỏ qua bước này. Node DEV là một tùy chọn để kết nối và kiểm tra node được cung cấp bởi Klaytn. Nó là một tài khoản ngẫu nhiên và cho phép bạn đặt trước 100 KLAY. Và nó cài đặt chạy hết gas quá trình thử nghiệm. Một sự chọn khác là kết nối với Baobab để được kết nối với mạng thử nghiệm. Và thời điểm bạn chọn Baobab, KLAY trong tài khoản bên dưới thay đổi thành 0. Các Dev Node và Baobab Node hoạt động độc lập với nhau, vì vậy các tài khoản tại cùng một địa chỉ được nhận dạng bởi nhau, nhưng trạng thái của tài khoản sẽ khác nhau vì các node khác nhau. Vì vậy, số dư sẽ thay đổi.
+
+Hãy thử làm mới trang bằng việc chọn lại Dev Node một lần nữa. Tiếp tới Loading Account, không có tài khoản đã sử dụng trước đây và tôi sẽ tạo một tài khoản mới khác. Điều thú vị là bạn có thể tải xuống tài khoản này dưới dạng tệp keystore hoặc khóa bí mật và sử dụng lại. Nếu bạn đang thử nghiệm trên một máy tính khác, bạn muốn tiếp tục với tài khoản cũ bằng cách cung cấp thông tin về keystore mà mình đã lưu.
+
+Sau đó làm mới trang một lần nữa. Khi tài khoản được tạo, nhấp lại và chọn import an account. Chuyển đến Private Key và dán sao lưu của khóa bí mật.  Tài khoản hiển thị sẽ là test account. Nếu bạn chọn lại tài khoản, bạn sẽ có tài khoản thử nghiệm mà chúng tôi đã nhập bên dưới. Vì vậy khi truy cập vào trang này bằng một máy tính khác bạn hoàn toàn có thực hiện công việc thử nghiệm một cách đồng nhất.
+
+Thay vì giải thích Tx Value, tôi sẽ cố gắng triển khai nó đầu tiên. Nhấp vào nút compile để triển khai AdditionGame. Nhấn Deploy, việc triển khai sẽ hoàn thành trong vòng chưa đầy 3 giây. Có một hàm băm TX trong giữa cái bảng, phải không? Đây là thông tin giao dịch hàm băm được tạo ra khi triển khai. Trên cùng của bảng, thông tin hàm băm cho thấy địa chỉ nào đã được triển khai.
+
+Nếu bạn nhìn vào bảng điều khiển bên cạnh, bạn sẽ thấy địa chỉ nào hiện đang có contract được triển khai và bên dưới bạn có lựa chọn tải giá trị của biến trạng thái chủ sở hữu. Đây là một hàm getter. Vì thông tin của biến trạng thái là công khai nên bạn có thể tạo ra một hàm getter để lấy giá trị của biến chủ sở hữu. Khi bạn nhấn nút Call, một địa chỉ sẽ xuất hiện. Địa chỉ này là gì?
+
+Vâng, đây là địa chỉ tài khoản của người đã triển khai contract này. Tôi đã triển khai contract dưới dạng “From Account”, vì vậy tài khoản này được lưu dưới dạng giá trị của biến trạng thái chủ sơ hữu. Như vậy, tôi đã hoàn thành việc triển khai hợp đồng thông minh qua Klaytn IDE và đã kiểm tra chủ sở hữu của contract. Tiếp theo, chúng ta sẽ viết và kiểm tra hai hàm còn lại trong lớp kế tiếp.
+
+4.4.	Klaytn IDE và hợp đồng thông minh 2
+Chúng ta hãy tiếp tục tạo chức năng kiểm tra số lượng còn lại của KLAY trong địa chỉ hợp đồng. Hãy chọn vào “Auto Checkbox”. Bên trong hàm tạo, chúng ta sẽ tạo chức năng getBalance. (Code)
+
+Sử dụng hàm “getBalance ()” với thông số hiển thị là public và chế độ chỉ đọc. Cuối cùng, xác định kiểu return của hàm vừa được định nghĩa ở trên.
+
+Địa chỉ này đề cập đến hợp đồng hiện tại. Đây là hợp đồng edition game, trong đó thành viên có thể truy cập vào balance. Nhấp vào nút Deploy, chức năng getBalance () được tạo và nút Call được kích hoạt. Hãy nhấp vào nut Call, khi đó số dư hiện tại bằng 0, có nghĩa tôi chưa gửi gì cả.
+
+Tiếp theo, hãy tạo một hàm gửi KLAY đến địa chỉ hợp đồng từ tài khoản chủ sở hữu. 
+(Code)
+
+Tôi đã hiện thị công khai và thực hiện các khoản phải trả. Bất cứ khi nào bạn gửi KLAY đến hàm solidity trong tài khoản của mình, bạn phải luôn tạo loại mà có thể trả. Bằng cách đó tôi có thể nhận được tiền từ hàm. Tiếp theo, chúng ta sẽ kiểm tra tính hợp lệ.
+(Code)
+
+Nếu bạn không sử dụng từ khóa yêu cầu, hàm sẽ không hoạt động. msg.sender sẽ nhắc tới đến tài khoản mà gọi hàm và so sánh số tài khoản hiện tại với tài khoản chủ sở hữu biến trạng thái. Nếu tài khoản hiện tại không phải là tài khoản chủ sở hữu, nó sẽ không thực thi chức năng. Vì vậy, hãy kiểm tra tính hợp lệ để xem liệu có thể chuyển KLAY từ tài khoản chủ sở hữu sang hợp đồng hay không.
+
+Nhấn nút Deploy. Chức năng gửi tiên hiện được kích hoạt. Nếu bạn gửi KLAY với chức năng gửi tiền, bạn phải sử dụng Tx.Value. Nếu hàm có loại phải trả, bạn phải sử dụng tx.Value. Với test_KLAY, nhập 1 làm giá trị. Sau đó nhấp vào nút gửi tiền. Giao dịch của bạn đã thành công và đưa biên lai giao dịch cho bạn. Nếu bạn xem tài khoản từ “From Account” số dư sẽ giảm từ 100 KLAY xuống còn 99 KLAY. Nếu đây là giao dịch bình thường thị hệ thống sẽ khấu trừ phí giao dịch, nhưng tôi đã chọn nút dev, không bao gồm nút phát triển hoặc gas.
+
+Bây giờ, hãy gọi hàm “Deposit” để xem số dư của hợp đồng là bao nhiêu. Nó chứa một giá trị. Lưu ý rằng chúng ta chỉ gửi 1 KLAY. Đây là giá trị của 1 KLAY được chuyển đổi thành peb, đơn vị tối thiểu của KLAY. Trong máy ảo Klayton, bạn cần chuyển đổi KLAY thành đơn vị peb nhỏ nhất và xử lý nó, để bạn thấy con số này. Khi nhập một giá trị từ tx.value và gửi nó đến hàm Deposit, IDE sẽ tự động chuyển đổi nó thành đơn vị nhỏ nhất, peb. Đây là một tính năng rất hữu ích để thử nghiệm. Ngược lại, bạn cũng có thể kiểm tra với các đơn vị khác nhau trong giá trị tx, lần này với đơn vị thấp nhất, peb. Hãy chuyển đổi 2 KLAY thành peb và gửi nó đến hợp đồng. Quay trở lại trang web chuyển đổi đơn vị, nhập 2 KLAY, sao chép giá trị đã chuyển đổi sang peb và dán vào giá trị tx.
+
+Và sau đó bạn chọn hàm gửi tiền. Giao dịch đã thành công. Hãy gọi hàm “Getbalance” để kiểm tra balance và bạn có thể kiểm tra bằng việc chuyển đổi đơn vị.
+
+Và giới hạn gas được tự động theo mặc định. Nói cách khác, nó tính toán giới hạn gas để vào hàm và tự động xác định nó. Điều này là do tính toán phụ thuộc vào độ phức tạp của hàm. Vì vậy, giới hạn gas để xử lý chức năng là không cố định. Khi gửi tiền bằng ví từ bài trước đó giới hạn gas đã được cố định ở mức 25000. Đó chỉ là một giao dịch gửi tiền, do đó không có sự phức tạp và giới hạn gas được cố định. Trên thực tế, bạn có thể tự nhập giới hạn gas này và thử kiểm tra chính xác hơn. 
+
+4.5.	Klaytn IDE và hợp đồng thông minh 3
+Với chức năng cuối cùng này, hãy viết logic để chuyển tiền trong hợp đồng vào tài khoản người dùng khi người dùng đã giải quyết vấn đề của addition game. Trong đó, người dùng trả lời đúng câu gọi hàm này để nhận tiền trực tiếp.
+
+Lấy giá trị KLAY để truyền cho người dùng làm đối số. Lưu ý rằng giá trị này được chuyển đổi từ giao diện người dùng sang peb và được xử lý. Và một hàm trả về Boolean. Tiếp theo, bạn cần xác thực rằng số dư trong hợp đồng bằng với giá trị bạn muốn gửi cho người dùng.
+
+Gọi hàm getbalance () ở trên để gọi số dư còn lại trong hợp đồng hiện tại và chuyển nó nếu nó bằng hoặc lớn hơn giá trị nhận được dưới dạng đối số.
+
+Người dùng có câu trả lời đúng sẽ gọi hàm msg.sender, (transfer (_value)) để nhận tiền thưởng và gửi KLAY cho người dùng bằng chức năng chuyển tiền. Và cuối cùng, hàm return được gọi để kiểm tra liệu giao dịch có thành công hay không.
+
+Hiện tại, chúng ta đã viết code hợp đồng thông minh mà chúng ta sẽ tiến hành sử dụng nó. Bây giờ hãy làm bài kiểm tra cuối cùng. Để triển khai, đặt giá trị Tx thành 0 và đặt giới hạn gas trở lại tự động. Để sử dụng chức năng chuyển tiền chúng ta sẽ gửi lại KLAY vì số dư hợp đồng là 0 sau khi triển khai cái mới. Giá trị Tx là 3 và tôi sẽ thay đổi Test_peb thành Test_klay. Nhấn nút Send trong chức năng deposit. Nếu giao dịch thành công, hãy nhấp vào ‘get balance’, tiền của bạn sẽ hiển thị. Hãy nhớ rằng số dư tài khoản của tôi là 94 KLAY.
+
+Bây giờ hãy sử dụng chức năng transfer. Đặt giá trị Tx trở về 0 và nhấp vào nút Send của chức năng transfer. Bây giờ, đây là một hàm chứa các tham số, bạn phải gửi giá trị đối số khi cửa sổ xuất hiện. Bạn cũng phải chuyển đổi KLAY sang peb khi bạn gửi nó. Hãy nhớ rằng các giá trị KLAY được gửi đến hợp đồng được chuyển đổi thành peb khi được xử lý. Quay trở lại trang web chuyển đổi, và chuyển đổi 1 KLAY. Sao chép và dán các giá trị Peb. Đặt nút Call, giao dịch sẽ được thực hiện và biên nhận sẽ được trả lại thành công. Số dư của ‘From account’ đã tăng thêm một KLAY, đó là 94 KLAY ngay trước đó. Cuối cùng, khi hàm getBalance được gọi hiện còn 2 KLAY trong đó 1 KLAY giảm.
+
+Lưu ý, Dev Node này đang chạy, vì vậy các giao dịch chúng ta đã thực hiện sẽ được ghi lại trên Bloakchain. Làm thế nào để bạn kiểm tra nó? Tất cả bạn phải biết là địa chỉ hợp đồng. Thông tin dưới nút deploy là địa chỉ hợp đồng chúng ta đã triển khai cho Dev Node. 
+
+Nhấp vào nút compile một lần nữa và nhấp vào mũi tên addition game, dán địa chỉ hợp đồng một lần nữa. Sau đó các chức năng được kích hoạt lại. Hãy gọi hàm Getbalance. Số dư của bạn sẽ vẫn giữ nguyên số tiền như trước đây. Nếu bạn chỉ biết địa chỉ contract, bạn có thể kiểm tra lịch sử giao dịch. Như vậy, chúng ta đã nghiên cứu và thử nghiệm addition game bằng cách sử dụng IDE Klaytn.
